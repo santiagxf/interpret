@@ -44,7 +44,7 @@ def get_explanation_from_grads(estimator_name: str,
         The explanation
     """
     if force_weights:
-        weights = [FeatureWeight(token, grads[idx]) for idx, token in enumerate(tokens)]
+        weights = FeatureWeights(pos=[FeatureWeight(token, grads[idx]) for idx, token in enumerate(tokens)], neg=[])
     else:
         weights = FeatureWeights(pos=[FeatureWeight("Highlighted in text", weight=np.array(grads).sum(), value=0)], neg=[])
     return Explanation(estimator=estimator_name,
